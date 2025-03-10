@@ -38,6 +38,11 @@
             animation: spin 1s linear infinite;
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         body {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             min-height: 100vh;
@@ -52,21 +57,21 @@
         /* Logo容器优化 */
         .logo-container {
             position: relative;
-            margin: 2rem 0;
-            min-height: 120px;
+            margin: 1rem 0;
+            min-height: 100px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .logo {
-            max-width: min(80vw, 300px);
+            max-width: min(60vw, 250px);
             height: auto;
             transition: transform 0.3s ease;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             background: white;
-            padding: 8px;
+            padding: 6px;
             opacity: 0;
             transform: translateY(20px);
             animation: logoFade 0.8s ease forwards;
@@ -79,6 +84,36 @@
             }
         }
 
+        /* 公司名称样式 */
+        .company-name {
+            font-size: clamp(2.2rem, 7vw, 3.8rem);
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 0.5rem 0 1.5rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: logoFade 0.8s ease forwards 0.3s;
+            text-shadow: 
+                2px 2px 3px rgba(0,0,0,0.1),
+                0 0 8px rgba(255,255,255,0.3);
+        }
+
+        .company-name::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                var(--primary-color) 20%,
+                var(--accent-color) 80%);
+            border-radius: 2px;
+        }
+
         /* 主要内容区域 */
         .main-content {
             text-align: center;
@@ -89,12 +124,12 @@
         }
 
         .title {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            font-weight: 700;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 600;
             background: linear-gradient(135deg, var(--primary-color) 30%, var(--accent-color) 70%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             line-height: 1.3;
             padding: 0 1rem;
         }
@@ -126,11 +161,14 @@
             min-height: 60px;
         }
 
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
         /* 页脚优化 */
         .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+            margin-top: auto;
             padding: 1.2rem;
             background: rgba(255, 255, 255, 0.98);
             text-align: center;
@@ -140,20 +178,30 @@
             backdrop-filter: blur(8px);
             display: grid;
             gap: 0.5rem;
+            width: 100%;
         }
 
-        /* 弹窗样式优化 */
-        .modal-content {
-            max-width: 90%;
-            padding: 1.5rem;
+        .footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent-color);
         }
 
         @media (max-width: 768px) {
             .logo {
                 max-width: 70vw;
             }
-            .title {
-                font-size: clamp(1.8rem, 8vw, 2.5rem);
+            .company-name {
+                font-size: clamp(2rem, 8vw, 3rem);
+                margin: 0.3rem 0 1rem;
+            }
+            .company-name::after {
+                width: 80px;
+                bottom: -8px;
             }
             .cta-button {
                 font-size: 1rem;
@@ -162,7 +210,6 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 预加载Logo -->
     <link rel="preload" href="https://user-assets.sxlcdn.com/images/1168429/Fkx2BA9I7gswvJtN-i70CwMDWBwG.jpg" as="image">
 </head>
 <body>
@@ -176,22 +223,23 @@
                  loading="eager"
                  onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2YwZjBmMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMzMzIj5Mb2dvPC90ZXh0Pjwvc3ZnPg=='">
         </div>
+        <h1 class="company-name">StarTech</h1>
         
-        <h1 class="title">探索智能未来<br><span style="font-size: 0.8em;">科技改变世界</span></h1>
+        <h2 class="title">探索智能未来<br><span style="font-size: 0.8em;">科技改变世界</span></h2>
         
         <div class="buttons-container">
             <a href="https://librarys.mysxl.cn" class="cta-button">
                 <i class="fas fa-tools"></i>
                 <div>
                     <div>我们的制作</div>
-                    <div style="font-size:0.9em;opacity:0.8;">技术展示</div>
+                    <div style="font-size:0.9em;opacity:0.8;">创新技术展示</div>
                 </div>
             </a>
             <a href="https://startech7.mysxl.cn" class="cta-button">
                 <i class="fas fa-users"></i>
                 <div>
                     <div>关于我们</div>
-                    <div style="font-size:0.9em;opacity:0.8;">团队介绍</div>
+                    <div style="font-size:0.9em;opacity:0.8;">专业团队介绍</div>
                 </div>
             </a>
         </div>
@@ -203,19 +251,17 @@
             <a href="javascript:void(0)" onclick="showModal('termsModal')">使用条款</a>
         </div>
         <div class="contact-email">
-            联系我们: <a href="mailto:ceo@startech7.top">ceo@startech7.top</a> 我们的小程序：无境math已备案且上线，欢迎体验
+            联系我们: <a href="mailto:ceo@startech7.top">ceo@startech7.top</a>
         </div>
         <div>
             &copy; 2025 StarTech. 保留所有权利。
         </div>
     </div>
 
-    <!-- 弹窗内容保持不变 -->
-
     <script>
-        // 增强型加载控制
+        // 加载控制逻辑
         let loadedAssets = 0;
-        const totalAssets = 1; // Logo数量
+        const totalAssets = 1;
 
         function checkAssetsLoaded() {
             if(++loadedAssets >= totalAssets) {
@@ -226,7 +272,6 @@
             }
         }
 
-        // Logo加载保障
         const logo = document.querySelector('.logo');
         logo.onload = () => {
             logo.style.opacity = '1';
@@ -237,39 +282,23 @@
             checkAssetsLoaded();
         }
 
-        // 加载超时处理
         setTimeout(checkAssetsLoaded, 3000);
 
         // 弹窗管理系统
         const ModalManager = {
-            current: null,
-            show(id) {
-                this.current = document.getElementById(id);
-                if (this.current) {
-                    this.current.style.display = 'block';
-                    document.body.style.overflow = 'hidden';
-                }
+            show: (id) => {
+                const modal = document.getElementById(id);
+                if(modal) modal.style.display = 'block';
             },
-            hide() {
-                if (this.current) {
-                    this.current.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                    this.current = null;
-                }
+            hide: (id) => {
+                const modal = document.getElementById(id);
+                if(modal) modal.style.display = 'none';
             }
         };
 
-        // 事件监听优化
-        document.addEventListener('click', (e) => {
-            if (e.target.closest('[onclick*="showModal"]')) {
-                const modalId = e.target.closest('[onclick]').getAttribute('onclick').match(/'([^']+)'/)[1];
-                ModalManager.show(modalId);
-            } else if (e.target.closest('.modal, .close-btn')) {
-                ModalManager.hide();
-            }
-        });
-
-        document.addEventListener('keydown', (e) => e.key === 'Escape' && ModalManager.hide());
+        function showModal(modalId) {
+            ModalManager.show(modalId);
+        }
     </script>
 </body>
 </html>
